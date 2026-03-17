@@ -82,13 +82,18 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   width:78px;
   height:78px;
   border-radius:var(--rmd);
-  background:transparent; /* remove blue box */
+  background:transparent;
   display:flex;
   align-items:center;
   justify-content:center;
   box-shadow:none;
   flex-shrink:0;
   overflow:hidden
+}
+.nav-logo-box img{
+  width:100%;
+  height:100%;
+  object-fit:contain
 }
 .nav-logo-name{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink);line-height:1}
 .nav-logo-sub{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink45);margin-top:3px}
