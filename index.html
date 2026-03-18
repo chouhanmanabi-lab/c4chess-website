@@ -511,10 +511,10 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
       <span class="nav-link" onclick="showPage('home');setTimeout(()=>document.getElementById('faqSection').scrollIntoView({behavior:'smooth'}),100)">FAQ</span>
     </div>
     <div class="nav-right">
-      <button class="nav-dash" onclick="window.open('https://portal.c4chess.com/login','_blank')">
-        <div class="nav-dash-ico">♟</div>
-        My Dashboard
-      </button>
+      <button class="nav-dash" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')">
+  <div class="nav-dash-ico">♟</div>
+  My Dashboard
+</button>
       <button class="nav-cta" onclick="showPage('home');setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">
         Book a Free Trial
       </button>
@@ -527,7 +527,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     <span class="nav-link" onclick="showPage('coaching');toggleMob()">Coaching</span>
     <span class="nav-link" onclick="showPage('career');toggleMob()">Career</span>
     <span class="nav-link" onclick="showPage('home');toggleMob();setTimeout(()=>document.getElementById('faqSection').scrollIntoView({behavior:'smooth'}),100)">FAQ</span>
-    <button class="nav-dash mob-dash" onclick="window.open('https://portal.c4chess.com/login','_blank')">
+    <button class="nav-dash" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')"></button>
     <button class="nav-cta mob-cta" onclick="showPage('home');toggleMob();setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">Book a Free Trial</button>
   </div>
 </nav>
@@ -676,8 +676,13 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
         <div class="prole"><div class="prole-ico">👨‍🏫</div><div><div class="prole-name">Coach</div><div class="prole-desc">Manage students & sessions</div></div></div>
         <div class="prole"><div class="prole-ico">👪</div><div><div class="prole-name">Parent</div><div class="prole-desc">Monitor your child's progress</div></div></div>
       </div>
-      <button class="pbtn" onclick="window.open('https://portal.c4chess.com/login','_blank')">Enter Dashboard →</button>
-      <button class="pbtn2" onclick="document.getElementById('trialSection').scrollIntoView({behavior:'smooth'})">Book a Free Trial</button>
+      <button class="nav-dash mob-dash" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')">
+  <div class="nav-dash-ico">♟</div>
+  My Dashboard
+</button>
+<button class="nav-cta mob-cta" onclick="showPage('home');toggleMob();setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">
+  Book a Free Trial
+</button>
     </div>
   </div>
 </section>
