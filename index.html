@@ -38,6 +38,8 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 @keyframes correctPop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
 @keyframes streakPulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
 @keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}60%{box-shadow:0 0 0 12px rgba(37,211,102,0)}}
+@keyframes milestonePulse{0%,100%{box-shadow:0 0 0 0 rgba(184,151,90,0)}60%{box-shadow:0 0 0 8px rgba(184,151,90,.18)}}
+@keyframes starSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
 .sr{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.215,.61,.355,1),transform .7s cubic-bezier(.215,.61,.355,1)}
 .sr.in{opacity:1;transform:none}
@@ -236,11 +238,52 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .wcard-perf{margin-top:4px;font-size:11px;color:rgba(255,255,255,.60)}
 .wcard-perf strong{color:#fcd34d;font-weight:700}
 
+/* ── MILESTONE BANNER ── */
+.milestone-banner{
+  margin-bottom:44px;
+  border-radius:var(--rlg);
+  border:1px solid var(--gold-bd);
+  background:linear-gradient(135deg,rgba(184,151,90,.10) 0%,rgba(29,37,64,.35) 100%);
+  padding:22px 28px;
+  display:flex;align-items:center;gap:20px;
+  position:relative;overflow:hidden;
+  animation:milestonePulse 3s infinite;
+}
+.milestone-banner::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0,rgba(255,255,255,.015) 1px,transparent 1px,transparent 48px);
+  pointer-events:none;
+}
+.milestone-star{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  box-shadow:0 4px 18px rgba(184,151,90,.45);
+}
+.milestone-text{flex:1}
+.milestone-title{
+  font-family:var(--serif);font-size:18px;font-weight:700;color:#fff;
+  line-height:1.2;margin-bottom:4px;
+}
+.milestone-sub{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(184,151,90,.75);
+}
+.milestone-badge{
+  flex-shrink:0;
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--gold);color:#fff;
+  padding:6px 14px;border-radius:var(--rpill);
+  font-weight:600;white-space:nowrap;
+  box-shadow:0 3px 14px rgba(184,151,90,.45);
+}
+
 /* CHESS PUZZLE SECTION */
 .puzzle-section{padding:112px 0;background:var(--navy);position:relative;overflow:hidden}
 .puzzle-section::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
 .puzzle-inner{max-width:1240px;margin:0 auto;padding:0 56px}
-.puzzle-hdr{margin-bottom:56px}
+.puzzle-hdr{margin-bottom:44px}
 .puzzle-hdr .sec-h{color:#fff}
 .puzzle-hdr .sec-lead{color:rgba(255,255,255,.52)}
 .puzzle-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
@@ -270,8 +313,8 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .puzzle-feedback.correct{background:rgba(34,197,94,.18);border:1px solid rgba(34,197,94,.35);color:#4ade80;padding:10px 16px}
 .puzzle-feedback.correct.streak{box-shadow:0 0 18px rgba(34,197,94,.4);animation:streakPulse .5s ease}
 .puzzle-feedback.wrong{background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.35);color:#f87171;padding:10px 16px}
-.puzzle-progress-row{display:flex;gap:8px;margin-bottom:20px}
-.puzzle-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.20);transition:background .3s,transform .2s}
+.puzzle-progress-row{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.puzzle-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.20);transition:background .3s,transform .2s;flex-shrink:0}
 .puzzle-dot.done{background:var(--gold);border-color:var(--gold);transform:scale(1.2)}
 .puzzle-dot.active{background:rgba(255,255,255,.50);border-color:rgba(255,255,255,.70)}
 .puzzle-hint-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--rmd);padding:9px 18px;font-family:var(--disp);font-size:12px;font-weight:600;color:rgba(255,255,255,.65);cursor:pointer;transition:background .2s,color .2s;margin-bottom:8px}
@@ -521,6 +564,8 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   .nav-ham{display:flex}
   .puzzle-layout{grid-template-columns:1fr;gap:36px}
   .puzzle-board{max-width:100%}
+  .milestone-banner{flex-direction:column;text-align:center;gap:14px}
+  .milestone-badge{align-self:center}
 }
 @media(max-width:560px){
   .hero-h1{font-size:46px}.sec-h{font-size:36px}
@@ -694,7 +739,18 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
       <h2 class="sec-h">Can you <em>find the move?</em></h2>
       <p class="sec-lead">Spot the winning idea. These are the same patterns our coaches drill every week.</p>
     </div>
-    <div class="puzzle-layout sr d1">
+
+    <!-- MILESTONE BANNER -->
+    <div class="milestone-banner sr d1">
+      <div class="milestone-star">🏆</div>
+      <div class="milestone-text">
+        <div class="milestone-title">A First in Chess Education — Playable Puzzles with Live Rating, Streak & Timer</div>
+        <div class="milestone-sub">C4Chess · The world's first chess academy to feature interactive rated puzzles directly on its website</div>
+      </div>
+      <div class="milestone-badge">Historic First · 2026</div>
+    </div>
+
+    <div class="puzzle-layout sr d2">
       <div class="puzzle-board-wrap">
         <div class="puzzle-board-and-ranks">
           <div class="puzzle-coord-ranks" id="rankLabels">
@@ -705,12 +761,10 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
         <div class="puzzle-coord-files"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
       </div>
       <div class="puzzle-panel">
-        <!-- Single clean meta row -->
         <div class="puzzle-meta">
-          <div class="puzzle-counter" id="puzzleCounter">Puzzle 1 of 5</div>
+          <div class="puzzle-counter" id="puzzleCounter">Puzzle 1 of 15</div>
           <div class="puzzle-type" id="puzzleType">Mate in 1</div>
         </div>
-        <!-- Stats row: rating + streak + timer -->
         <div class="puzzle-stats-row">
           Rating: <span id="rating">800</span> &nbsp;·&nbsp;
           Streak: <span id="streak">0</span> 🔥 &nbsp;·&nbsp;
@@ -718,13 +772,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
         </div>
         <div class="puzzle-prompt" id="puzzlePrompt">Find the best move.</div>
         <div class="puzzle-feedback" id="puzzleFeedback"></div>
-        <div class="puzzle-progress-row">
-          <div id="pd0" class="puzzle-dot active"></div>
-          <div id="pd1" class="puzzle-dot"></div>
-          <div id="pd2" class="puzzle-dot"></div>
-          <div id="pd3" class="puzzle-dot"></div>
-          <div id="pd4" class="puzzle-dot"></div>
-        </div>
+        <div class="puzzle-progress-row" id="progressDots"></div>
         <button class="puzzle-hint-btn" id="hintBtn" onclick="showHint()">💡 Show Hint</button>
         <div class="puzzle-hint-text" id="hintText"></div>
         <div class="puzzle-cta" id="puzzleCta" style="display:none">
@@ -755,7 +803,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
       </div>
       <div class="winners-grid">
         <div class="wcard sr">
-          <div class="wcard-img-wrap"><img src="assets/Kounish.jpeg" alt="Kounish Ghosh — Under-9 Champion, Nadia District Chess Championship 2026" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">🥇</div></div>
+          <div class="wcard-img-wrap"><img src="assets/Kounish.jpeg" alt="Kounish Ghosh" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">🥇</div></div>
           <div class="wcard-info">
             <div class="wcard-tournament">Nadia District Chess Championship 2026</div>
             <div class="wcard-name">Kounish Ghosh</div>
@@ -765,7 +813,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
           </div>
         </div>
         <div class="wcard sr d1">
-          <div class="wcard-img-wrap"><img src="assets/Ayaansh.jpeg" alt="Ayaansh — 2nd Place, School District Chess Tournament, Denver" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">🥈</div></div>
+          <div class="wcard-img-wrap"><img src="assets/Ayaansh.jpeg" alt="Ayaansh" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">🥈</div></div>
           <div class="wcard-info">
             <div class="wcard-tournament">School District Chess Tournament · Denver</div>
             <div class="wcard-name">Ayaansh</div>
@@ -774,7 +822,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
           </div>
         </div>
         <div class="wcard sr d2">
-          <div class="wcard-img-wrap"><img src="assets/Dhritabrata.jpeg" alt="Dhritabrata Ray — 8th All Bengal Age Group Rapid Chess Championship" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">♟</div></div>
+          <div class="wcard-img-wrap"><img src="assets/Dhritabrata.jpeg" alt="Dhritabrata Ray" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">♟</div></div>
           <div class="wcard-info">
             <div class="wcard-tournament">8th All Bengal Age Group Rapid Chess Championship</div>
             <div class="wcard-name">Dhritabrata Ray</div>
@@ -1025,7 +1073,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     <div class="apply-email">hr&#64;c4chess&#46;com</div>
     <p class="apply-note">Include a short introduction and how you'd like to contribute.</p>
     <div class="apply-cta-row">
-      <a href="/cdn-cgi/l/email-protection#bcd4cefcdf88dfd4d9cfcf92dfd3d1" class="btn btn-primary">Send Application →</a>
+      <a href="mailto:hr@c4chess.com" class="btn btn-primary">Send Application →</a>
       <button class="btn btn-ghost" onclick="showPage('home');setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">Book a Free Trial</button>
     </div>
     <div class="apply-tagline">Build your career. Build minds. Join C4Chess.</div>
@@ -1076,9 +1124,9 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
       </div>
       <div>
         <div class="footer-col-h">Contact</div>
-        <div class="fcrow">✉ <a href="/cdn-cgi/l/email-protection#05666a6b71646671456631666d6076762b666a68" style="color:rgba(170,184,216,.76)">contact&#64;c4chess&#46;com</a></div>
+        <div class="fcrow">✉ <a href="mailto:contact@c4chess.com" style="color:rgba(170,184,216,.76)">contact&#64;c4chess&#46;com</a></div>
         <div class="fcrow">📞 <a href="tel:+919641019781" style="color:rgba(170,184,216,.76)">+91-9641019781</a></div>
-        <div class="fcrow">✉ <a href="/cdn-cgi/l/email-protection#1a72685a792e79727f696934797577" style="color:rgba(170,184,216,.76)">hr&#64;c4chess&#46;com</a> <span style="font-size:11px;color:rgba(255,255,255,.28)">(Careers)</span></div>
+        <div class="fcrow">✉ <a href="mailto:hr@c4chess.com" style="color:rgba(170,184,216,.76)">hr&#64;c4chess&#46;com</a> <span style="font-size:11px;color:rgba(255,255,255,.28)">(Careers)</span></div>
       </div>
     </div>
     <div class="footer-rule"></div>
@@ -1089,7 +1137,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ─── NAV ─────────────────────────────────────────────── */
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -1130,7 +1178,6 @@ function triggerSR(){
 
 /* ─── SKILL TRACKER ──────────────────────────────────── */
 function initSkillTracker(){
-  // [tactics, patterns, calc, openings, positional, endgame, label]
   const STATS={
     1:[12,8,5,6,5,4,'Pawn Pioneer'],
     2:[32,28,20,18,14,12,"Knight's Quest"],
@@ -1139,7 +1186,6 @@ function initSkillTracker(){
     5:[92,88,82,88,80,78,"Queen's Gambit"]
   };
   const KEYS=['tactics','patterns','calc','openings','positional','endgame'];
-
   function setLevel(n){
     const s=STATS[n]; if(!s) return;
     KEYS.forEach((k,i)=>{
@@ -1151,9 +1197,7 @@ function initSkillTracker(){
     document.querySelectorAll('.lrow').forEach(r=>r.classList.remove('lrow-active'));
     document.querySelector(`.lrow[data-level="${n}"]`)?.classList.add('lrow-active');
   }
-
   setTimeout(()=>setLevel(1),400);
-
   const obs=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) setLevel(parseInt(e.target.dataset.level)); });
   },{threshold:0.55});
@@ -1170,20 +1214,8 @@ function initChessPuzzles(){
     P:'♙',R:'♖',N:'♘',B:'♗',Q:'♕',K:'♔'
   };
 
-  /*
-   * Each puzzle defines:
-   *   fen      — exact position string
-   *   fromSq   — correct piece's square in algebraic e.g. "a1"
-   *   toSq     — destination square in algebraic e.g. "a8"
-   *   type     — label shown in badge
-   *   prompt   — instruction text
-   *   hint     — hint text
-   *
-   * Board is rendered with the side-to-move at the BOTTOM:
-   *   white to move → rank 1 at bottom (normal)
-   *   black to move → rank 8 at bottom (flipped)
-   */
   const PUZZLES=[
+    /* ── ORIGINAL 5 ── */
     {
       fen:   '6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1',
       fromSq:'a1', toSq:'a8',
@@ -1218,26 +1250,105 @@ function initChessPuzzles(){
       type:  'Double Attack',
       prompt:'White to move — attack two black pieces at once.',
       hint:  'Push the f-pawn to f4 — it hits both knights simultaneously.'
+    },
+
+    /* ── NEW 10 ── */
+    {
+      fen:   'r2qkb1r/p2bpppp/1p3n2/8/3PN3/3B4/PPP1QPPP/R3K2R w KQkq - 0 1',
+      fromSq:'e4', toSq:'d6',
+      type:  'Smothered Mate',
+      prompt:'White to move — the knight delivers a stunning smothered mate.',
+      hint:  'Jump the knight to d6. The black king is trapped by its own pieces and cannot escape.'
+    },
+    {
+      fen:   'r3k3/1q3p1r/pPR1pB2/2p4p/B3b1pP/2p3P1/8/bN2K2R w - - 1 55',
+      fromSq:'c6', toSq:'c8',
+      type:  'Discovered Check',
+      prompt:'White to move — unleash a devastating discovered check.',
+      hint:  'The rook moves to c8, uncovering the bishop on f6 which gives check.'
+    },
+    {
+      fen:   '1rr4q/5pk1/2P1QRp1/1p2p1P1/P1P1P2p/3p1b2/P3B3/R1KN2N1 w - - 0 47',
+      fromSq:'e6', toSq:'f7',
+      type:  'Checkmate',
+      prompt:'White to move — find the checkmate.',
+      hint:  'The queen swoops to f7 — the king has nowhere to run.'
+    },
+    {
+      fen:   '3r4/6B1/1Q5r/p1pk4/6Pp/N2bpP1B/P3R2P/3R1K2 w - - 0 63',
+      fromSq:'d1', toSq:'d3',
+      type:  'Checkmate',
+      prompt:'White to move — deliver checkmate with your rook.',
+      hint:  'Rook to d3 — the king on c5 is caught in a mating net with no escape.'
+    },
+    {
+      fen:   'rn1qkb1r/p2bpn2/3p2p1/2p2pPN/4Q3/P2PP2N/RPP2P1P/2B1KR2 w - - 11 20',
+      fromSq:'h5', toSq:'f6',
+      type:  'Smothered Mate',
+      prompt:'White to move — another smothered mate with the knight!',
+      hint:  'Knight to f6 is checkmate — the king is completely smothered by its own pieces.'
+    },
+    {
+      fen:   '6k1/3b4/p6Q/PBrpr2P/1P6/6p1/6P1/B2K1R2 w - - 1 60',
+      fromSq:'f1', toSq:'f8',
+      type:  'Checkmate',
+      prompt:'White to move — finish the game with your major piece.',
+      hint:  'Rook to f8 is checkmate. The bishop on b5 controls the escape squares.'
+    },
+    {
+      fen:   'rn3r2/1p5p/p2p1p1b/1Pp1pNpN/4P1k1/P7/1PKP2P1/R1B2BR1 w - - 2 27',
+      fromSq:'f1', toSq:'e2',
+      type:  'Checkmate',
+      prompt:'White to move — the bishop ends it all.',
+      hint:  'Bishop to e2 is checkmate. The king on g4 is completely surrounded.'
+    },
+    {
+      fen:   '8/7k/2p2B2/1b6/4p1Q1/r6B/6KP/1N1n4 w - - 1 85',
+      fromSq:'g4', toSq:'g7',
+      type:  'Checkmate',
+      prompt:'White to move — queen and bishop combine for checkmate.',
+      hint:  'Queen to g7 is checkmate. The bishop on f6 takes away the king\'s last hope.'
+    },
+    {
+      fen:   'rn2B1nk/2b2b2/1p2P2B/2p2pQ1/p1PP4/1P3KPP/8/6qR w - - 6 37',
+      fromSq:'g5', toSq:'g7',
+      type:  'Checkmate',
+      prompt:'White to move — checkmate in one.',
+      hint:  'Queen captures on g7 — checkmate. The king on h8 has no escape.'
+    },
+    {
+      fen:   '2r3nr/p4pbp/nPk3p1/4p3/2NQ4/4qbP1/PP2B2P/1RBK3R w - - 0 21',
+      fromSq:'c4', toSq:'a5',
+      type:  'Checkmate',
+      prompt:'White to move — the knight delivers the final blow.',
+      hint:  'Knight to a5 is checkmate. The king on c6 is trapped with no escape squares.'
     }
   ];
 
+  const TOTAL = PUZZLES.length;
   let current=0, selected=null, streak=0, rating=800, timeLeft=60, timerInterval=null;
 
-  /* ── helpers ── */
-  function $(id){ return document.getElementById(id); }
-
-  /* Convert algebraic square ("a1","h8") to board array indices [row, col].
-     FEN row 0 = rank 8, row 7 = rank 1.  col 0 = file a, col 7 = file h. */
-  function algToBoard(sq){
-    const col = sq.charCodeAt(0)-97;          // a=0 … h=7
-    const row = 8 - parseInt(sq[1]);          // rank8→row0, rank1→row7
-    return {r:row, c:col};
+  /* Build progress dots dynamically */
+  function buildDots(){
+    const row = document.getElementById('progressDots');
+    row.innerHTML = '';
+    for(let i=0;i<TOTAL;i++){
+      const d=document.createElement('div');
+      d.id='pd'+i;
+      d.className='puzzle-dot'+(i===0?' active':'');
+      row.appendChild(d);
+    }
   }
 
-  /* When the board is FLIPPED (black at bottom), display row/col differ from
-     board array row/col.  We store board indices in data-br / data-bc,
-     and display indices in data-r / data-c (used for square colour). */
-  function getSquare(boardR, boardC){
+  function $(id){ return document.getElementById(id); }
+
+  function algToBoard(sq){
+    const col=sq.charCodeAt(0)-97;
+    const row=8-parseInt(sq[1]);
+    return {r:row,c:col};
+  }
+
+  function getSquare(boardR,boardC){
     return boardEl.querySelector(`.psq[data-br="${boardR}"][data-bc="${boardC}"]`);
   }
 
@@ -1246,8 +1357,9 @@ function initChessPuzzles(){
   }
 
   function updateDots(){
-    for(let i=0;i<PUZZLES.length;i++){
+    for(let i=0;i<TOTAL;i++){
       const d=$('pd'+i);
+      if(!d) continue;
       d.className='puzzle-dot'+(i<current?' done':i===current?' active':'');
     }
   }
@@ -1256,7 +1368,7 @@ function initChessPuzzles(){
     const fb=$('puzzleFeedback');
     fb.className='puzzle-feedback '+(type||'');
     fb.textContent=msg;
-    if(type==='correct' && streak>=3) fb.classList.add('streak');
+    if(type==='correct'&&streak>=3) fb.classList.add('streak');
   }
 
   function startTimer(){
@@ -1270,7 +1382,6 @@ function initChessPuzzles(){
     },1000);
   }
 
-  /* ── parse FEN position string to 8×8 array (board[rank8row=0][fileA=0]) ── */
   function parseFEN(fen){
     const parts=fen.split(' ');
     const rows=parts[0].split('/');
@@ -1284,38 +1395,31 @@ function initChessPuzzles(){
       }
       board.push(row);
     });
-    return {board, turn};
+    return {board,turn};
   }
 
-  /* ── render board, flipped if black to move ── */
   function render(){
     const p=PUZZLES[current];
-    const {board, turn}=parseFEN(p.fen);
-    const flip=(turn==='b');   // flip=true → rank 8 at bottom
+    const {board,turn}=parseFEN(p.fen);
+    const flip=(turn==='b');
     boardEl.innerHTML='';
     selected=null;
 
-    for(let di=0;di<8;di++){          // di = display row (0=top of board visual)
-      for(let dj=0;dj<8;dj++){        // dj = display col (0=left)
-        const br = flip ? 7-di : di;  // actual board row
-        const bc = flip ? 7-dj : dj;  // actual board col
-
+    for(let di=0;di<8;di++){
+      for(let dj=0;dj<8;dj++){
+        const br=flip?7-di:di;
+        const bc=flip?7-dj:dj;
         const sq=document.createElement('div');
-        // Square colour depends on display position
         sq.className='psq '+((di+dj)%2===0?'light':'dark');
-        // Store BOARD indices so we can look up the piece & validate moves
-        sq.dataset.br=br;
-        sq.dataset.bc=bc;
-
+        sq.dataset.br=br; sq.dataset.bc=bc;
         const piece=board[br][bc];
         if(piece) sq.textContent=PIECE_GLYPHS[piece]||'';
-
         sq.addEventListener('click',()=>handleClick(br,bc,piece,turn,board));
         boardEl.appendChild(sq);
       }
     }
 
-    $('puzzleCounter').textContent=`Puzzle ${current+1} of ${PUZZLES.length}`;
+    $('puzzleCounter').textContent=`Puzzle ${current+1} of ${TOTAL}`;
     $('puzzleType').textContent=p.type;
     $('puzzlePrompt').textContent=p.prompt;
     $('puzzleFeedback').className='puzzle-feedback';
@@ -1323,8 +1427,7 @@ function initChessPuzzles(){
     $('hintText').textContent='';
     $('puzzleCta').style.display='none';
 
-    // Update rank labels to match board orientation
-    const ranks = flip ? ['1','2','3','4','5','6','7','8'] : ['8','7','6','5','4','3','2','1'];
+    const ranks=flip?['1','2','3','4','5','6','7','8']:['8','7','6','5','4','3','2','1'];
     const rankEl=$('rankLabels');
     if(rankEl) rankEl.querySelectorAll('span').forEach((s,i)=>s.textContent=ranks[i]);
 
@@ -1332,81 +1435,57 @@ function initChessPuzzles(){
     startTimer();
   }
 
-  /* ── click handler ── */
   function handleClick(br,bc,piece,turn,board){
     if($('puzzleCta').style.display==='block') return;
-
     if(!selected){
       if(!piece) return;
-      const isWhitePiece = (piece===piece.toUpperCase());
-      if(turn==='w' && !isWhitePiece) return;
-      if(turn==='b' &&  isWhitePiece) return;
-      selected={r:br, c:bc};
+      const isWhitePiece=(piece===piece.toUpperCase());
+      if(turn==='w'&&!isWhitePiece) return;
+      if(turn==='b'&&isWhitePiece) return;
+      selected={r:br,c:bc};
       clearHighlights();
       getSquare(br,bc).classList.add('selected');
       return;
     }
-
-    const from=selected;
-    selected=null;
-    clearHighlights();
-
-    // Get the expected from/to squares in board-array coordinates
+    const from=selected; selected=null; clearHighlights();
     const p=PUZZLES[current];
     const expectedFrom=algToBoard(p.fromSq);
-    const expectedTo  =algToBoard(p.toSq);
-
-    const fromMatches = (from.r===expectedFrom.r && from.c===expectedFrom.c);
-    const toMatches   = (br  ===expectedTo.r     && bc  ===expectedTo.c);
-
-    if(fromMatches && toMatches){
-      onCorrect(from, {r:br, c:bc});
+    const expectedTo=algToBoard(p.toSq);
+    const fromMatches=(from.r===expectedFrom.r&&from.c===expectedFrom.c);
+    const toMatches=(br===expectedTo.r&&bc===expectedTo.c);
+    if(fromMatches&&toMatches){
+      onCorrect(from,{r:br,c:bc});
     } else {
-      // Give a specific hint if right piece but wrong destination
-      const msg = fromMatches
-        ? '✗ Right piece, wrong square. Try again.'
-        : '✗ That\'s not the right piece. Try again.';
-      onWrong(msg, from.r, from.c, br, bc);
+      const msg=fromMatches?'✗ Right piece, wrong square. Try again.':'✗ That\'s not the right piece. Try again.';
+      onWrong(msg,from.r,from.c,br,bc);
     }
   }
 
-  function onCorrect(from, to){
+  function onCorrect(from,to){
     clearInterval(timerInterval);
     streak++; rating+=10+(streak*2);
     $('streak').textContent=streak;
     $('rating').textContent=rating;
-
-    // Animate move on board
     const fromSq=getSquare(from.r,from.c);
-    const toSq  =getSquare(to.r,  to.c);
-    if(fromSq && toSq){
+    const toSq=getSquare(to.r,to.c);
+    if(fromSq&&toSq){
       toSq.textContent=fromSq.textContent;
       fromSq.textContent='';
       toSq.style.transform='scale(1.2)';
       setTimeout(()=>toSq.style.transform='',250);
     }
-
     setFeedback(`✓ Correct! +${10+(streak*2)} rating`,'correct');
     $('pd'+current).className='puzzle-dot done';
-
     setTimeout(()=>{
-      if(current<PUZZLES.length-1){
-        current++;
-        render();
-      } else {
-        clearInterval(timerInterval);
-        $('puzzleCta').style.display='block';
-        updateDots();
-      }
+      if(current<TOTAL-1){ current++; render(); }
+      else { clearInterval(timerInterval); $('puzzleCta').style.display='block'; updateDots(); }
     },1300);
   }
 
-  function onWrong(msg, fromR, fromC, toR, toC){
+  function onWrong(msg,fromR,fromC,toR,toC){
     clearInterval(timerInterval);
-    streak=0;
-    $('streak').textContent=streak;
+    streak=0; $('streak').textContent=streak;
     setFeedback(msg,'wrong');
-    // Shake the destination square if provided
     if(toR!==undefined){
       const sq=getSquare(toR,toC);
       if(sq){ sq.classList.add('wrong-sq'); setTimeout(()=>sq.classList.remove('wrong-sq'),350); }
@@ -1417,12 +1496,12 @@ function initChessPuzzles(){
   window.showHint=function(){
     const p=PUZZLES[current];
     $('hintText').textContent=p.hint;
-    // Highlight the correct piece's square
     const {r,c}=algToBoard(p.fromSq);
     const sq=getSquare(r,c);
     if(sq){ sq.classList.add('hint-sq'); setTimeout(()=>sq.classList.remove('hint-sq'),1200); }
   };
 
+  buildDots();
   render();
 }
 
