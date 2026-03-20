@@ -33,7 +33,12 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
 @keyframes goldPulse{0%,100%{box-shadow:0 0 0 0 rgba(184,151,90,0)}55%{box-shadow:0 0 0 5px rgba(184,151,90,.18)}}
 @keyframes shimmerSlide{0%{transform:skewX(-20deg) translateX(-150%)}100%{transform:skewX(-20deg) translateX(350%)}}
-@keyframes barIn{from{width:0!important}to{}}
+@keyframes hintPulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes wrongShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes correctPop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes streakPulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+@keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}60%{box-shadow:0 0 0 12px rgba(37,211,102,0)}}
+
 .sr{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.215,.61,.355,1),transform .7s cubic-bezier(.215,.61,.355,1)}
 .sr.in{opacity:1;transform:none}
 .sr.d1{transition-delay:.08s}.sr.d2{transition-delay:.16s}.sr.d3{transition-delay:.24s}
@@ -62,7 +67,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .nav.scrolled{box-shadow:0 2px 32px rgba(20,25,41,.09)}
 .nav-inner{max-width:1240px;margin:0 auto;padding:0 56px;display:flex;align-items:center;justify-content:space-between;height:72px}
 .nav-logo{display:flex;align-items:center;gap:13px;flex-shrink:0;cursor:pointer}
-.nav-logo-box{width:78px;height:78px;border-radius:var(--rmd);background:transparent;display:flex;align-items:center;justify-content:center;box-shadow:none;flex-shrink:0;overflow:hidden}
+.nav-logo-box{width:78px;height:78px;border-radius:var(--rmd);background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
 .nav-logo-box img{width:100%;height:100%;object-fit:contain}
 .nav-logo-name{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink);line-height:1}
 .nav-logo-sub{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink45);margin-top:3px}
@@ -164,10 +169,12 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .levels-inner{max-width:1240px;margin:0 auto;padding:0 56px}
 .levels-grid{display:grid;grid-template-columns:1fr 440px;gap:80px;align-items:start;margin-top:64px}
 .levels-list{display:flex;flex-direction:column}
-.lrow{display:flex;gap:24px;padding:30px 0;border-bottom:1px solid var(--ink15);transition:padding-left .25s}
+.lrow{display:flex;gap:24px;padding:30px 0;border-bottom:1px solid var(--ink15);transition:padding-left .25s,border-color .25s}
 .lrow:first-child{padding-top:0}
 .lrow:last-child{border-bottom:none}
 .lrow:hover{padding-left:8px}
+.lrow-active{padding-left:8px;border-color:var(--accent-bd)!important}
+.lrow-active .lrow-n{color:rgba(29,37,64,.22)!important}
 .lrow-n{font-family:var(--serif);font-size:56px;font-weight:300;font-style:italic;color:var(--ink15);line-height:1;flex-shrink:0;width:60px;transition:color .25s}
 .lrow:hover .lrow-n{color:rgba(29,37,64,.18)}
 .lrow-tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--accent-lt);border:1px solid var(--accent-bd);border-radius:var(--rpill);padding:3px 12px;margin-bottom:9px}
@@ -181,10 +188,10 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .prow:last-child{margin-bottom:0}
 .pskill{font-family:var(--disp);font-size:12px;font-weight:600;color:var(--ink);width:72px;flex-shrink:0}
 .ptrack{flex:1;height:7px;background:var(--ink15);border-radius:4px;overflow:hidden}
-.pfill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--navy),var(--accent));animation:barIn 1.6s cubic-bezier(.215,.61,.355,1) both}
+.pfill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--navy),var(--accent));width:0%;transition:width .7s cubic-bezier(.215,.61,.355,1)}
 .ppct{font-family:var(--mono);font-size:10px;color:var(--accent);width:34px;text-align:right;flex-shrink:0}
 
-/* ── TESTIMONIALS ──────────────────────────────────────── */
+/* TESTIMONIALS */
 .testi{padding:112px 0;background:var(--bg)}
 .testi-inner{max-width:1240px;margin:0 auto;padding:0 56px}
 .testi-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:52px;flex-wrap:wrap;gap:24px}
@@ -204,7 +211,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .twho{font-family:var(--mono);font-size:10px;letter-spacing:.12em;margin-top:3px;color:var(--ink45)}
 .tcard.feat .twho{color:rgba(255,255,255,.42)}
 
-/* ── WINNERS / STUDENT ACHIEVEMENTS ───────────────────── */
+/* WINNERS */
 .winners-section{margin-bottom:56px}
 .winners-divider{display:flex;align-items:center;gap:20px;margin-bottom:32px}
 .winners-divider-line{flex:1;height:1px;background:linear-gradient(90deg,var(--gold-bd),transparent)}
@@ -229,8 +236,51 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .wcard-perf{margin-top:4px;font-size:11px;color:rgba(255,255,255,.60)}
 .wcard-perf strong{color:#fcd34d;font-weight:700}
 
-@media(max-width:860px){.winners-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.winners-grid{grid-template-columns:1fr}}
+/* CHESS PUZZLE SECTION */
+.puzzle-section{padding:112px 0;background:var(--navy);position:relative;overflow:hidden}
+.puzzle-section::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.puzzle-inner{max-width:1240px;margin:0 auto;padding:0 56px}
+.puzzle-hdr{margin-bottom:56px}
+.puzzle-hdr .sec-h{color:#fff}
+.puzzle-hdr .sec-lead{color:rgba(255,255,255,.52)}
+.puzzle-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.puzzle-board-wrap{display:flex;flex-direction:column;align-items:flex-start;width:100%;max-width:440px}
+.puzzle-board-and-ranks{display:flex;flex-direction:row;align-items:stretch;width:100%}
+.puzzle-coord-ranks{display:flex;flex-direction:column;justify-content:space-around;padding:0 5px 0 0;pointer-events:none;flex-shrink:0}
+.puzzle-coord-ranks span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.30);height:12.5%;display:flex;align-items:center;justify-content:center}
+.puzzle-board{display:grid;grid-template-columns:repeat(8,1fr);border:3px solid rgba(255,255,255,.15);border-radius:8px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.45);width:100%;aspect-ratio:1}
+.puzzle-coord-files{display:flex;justify-content:space-around;width:100%;padding:4px 0 0;pointer-events:none;padding-left:18px}
+.puzzle-coord-files span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.30);width:12.5%;text-align:center}
+.psq{display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:clamp(26px,3.8vw,44px);line-height:1;transition:background .15s;user-select:none;position:relative;aspect-ratio:1;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+.psq.light{background:#e8dfc8}
+.psq.dark{background:#8b7355}
+.psq.selected{background:#f6f669!important;box-shadow:inset 0 0 0 3px rgba(200,200,0,.7)}
+.psq.hint-sq{background:#7fc97f!important;animation:hintPulse .6s ease 2}
+.psq.wrong-sq{animation:wrongShake .35s ease}
+.puzzle-panel{padding:40px 36px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:var(--rxl);backdrop-filter:blur(16px)}
+.puzzle-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.puzzle-counter{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.40)}
+.puzzle-type{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#fff;padding:4px 12px;border-radius:var(--rpill)}
+.puzzle-stats-row{display:flex;gap:20px;margin-bottom:12px;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.55)}
+.puzzle-stats-row span{color:#fff;font-weight:600}
+.puzzle-timer{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.55)}
+.puzzle-timer span{color:#fff;font-weight:600}
+.puzzle-prompt{font-family:var(--serif);font-size:22px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:24px}
+.puzzle-feedback{min-height:0;font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.04em;margin-bottom:16px;border-radius:var(--rmd);overflow:hidden;transition:all .25s}
+.puzzle-feedback.correct{background:rgba(34,197,94,.18);border:1px solid rgba(34,197,94,.35);color:#4ade80;padding:10px 16px}
+.puzzle-feedback.correct.streak{box-shadow:0 0 18px rgba(34,197,94,.4);animation:streakPulse .5s ease}
+.puzzle-feedback.wrong{background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.35);color:#f87171;padding:10px 16px}
+.puzzle-progress-row{display:flex;gap:8px;margin-bottom:20px}
+.puzzle-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.20);transition:background .3s,transform .2s}
+.puzzle-dot.done{background:var(--gold);border-color:var(--gold);transform:scale(1.2)}
+.puzzle-dot.active{background:rgba(255,255,255,.50);border-color:rgba(255,255,255,.70)}
+.puzzle-hint-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--rmd);padding:9px 18px;font-family:var(--disp);font-size:12px;font-weight:600;color:rgba(255,255,255,.65);cursor:pointer;transition:background .2s,color .2s;margin-bottom:8px}
+.puzzle-hint-btn:hover{background:rgba(255,255,255,.14);color:#fff}
+.puzzle-hint-text{font-size:13px;color:rgba(255,255,255,.50);min-height:0;margin-bottom:12px;line-height:1.6;font-style:italic}
+.puzzle-cta{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.10)}
+.puzzle-cta-title{font-family:var(--serif);font-size:22px;font-weight:700;color:#fff;margin-bottom:8px}
+.puzzle-cta-body{font-size:13px;line-height:1.72;color:rgba(255,255,255,.55);margin-bottom:20px}
+.puzzle-cta-btns{display:flex;flex-wrap:wrap;gap:10px}
 
 /* PORTAL */
 .portal{padding:104px 0;background:var(--navy);position:relative;overflow:hidden}
@@ -299,7 +349,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .form-input::placeholder{color:var(--ink45)}
 .form-input:focus{border-color:var(--navy);background:var(--bg2);box-shadow:0 0 0 4px rgba(29,37,64,.07)}
 .form-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%2314192966' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
-.form-submit{width:100%;padding:16px;background:var(--navy);color:#fff;font-family:var(--disp);font-size:13px;font-weight:800;letter-spacing:.09em;border-radius:var(--rmd);margin-top:8px;box-shadow:0 8px 28px var(--accent-sh);transition:background .2s,transform .15s,box-shadow .2s}
+.form-submit{width:100%;padding:16px;background:var(--navy);color:#fff;font-family:var(--disp);font-size:13px;font-weight:800;letter-spacing:.09em;border-radius:var(--rmd);margin-top:8px;box-shadow:0 8px 28px var(--accent-sh);transition:background .2s,transform .15s}
 .form-submit:hover{background:var(--navy-deep);transform:translateY(-1px)}
 .form-legal{text-align:center;font-size:11px;color:var(--ink45);margin-top:14px;line-height:1.6}
 .form-legal a{color:var(--navy)}
@@ -439,9 +489,18 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 .footer-btm{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .footer-copy{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.20)}
 
+/* FLOATING WHATSAPP */
+.wa-wrap{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center}
+.wa-float{width:58px;height:58px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(37,211,102,.45);animation:waPulse 2.4s infinite;transition:transform .2s,box-shadow .2s;cursor:pointer;text-decoration:none;flex-shrink:0}
+.wa-float:hover{transform:scale(1.10) translateY(-2px);box-shadow:0 10px 36px rgba(37,211,102,.60);animation:none}
+.wa-float svg{display:block;flex-shrink:0}
+.wa-tooltip{position:fixed;bottom:36px;right:98px;z-index:998;background:var(--navy-deep);color:rgba(255,255,255,.88);font-family:var(--disp);font-size:12px;font-weight:600;letter-spacing:.04em;padding:8px 14px;border-radius:var(--rmd);white-space:nowrap;pointer-events:none;opacity:0;transform:translateX(6px);transition:opacity .2s,transform .2s;box-shadow:0 4px 18px rgba(20,25,41,.25)}
+.wa-tooltip::after{content:"";position:absolute;right:-6px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-right:none;border-left-color:var(--navy-deep)}
+.wa-wrap:hover .wa-tooltip{opacity:1;transform:translateX(0)}
+
 /* RESPONSIVE */
 @media(max-width:1080px){
-  .hero-inner,.about-inner,.courses-inner,.levels-inner,.portal-inner,.faq-inner,.trial-inner,.testi-inner,.trust-items,.footer-inner,.nav-inner,.about-page-intro-inner,.team-inner,.about-values-inner,.coaching-inner,.curriculum-inner,.career-hero-inner,.why-inner,.who-inner,.apply-inner,.page-hero-inner{padding-left:36px;padding-right:36px}
+  .hero-inner,.about-inner,.courses-inner,.levels-inner,.portal-inner,.faq-inner,.trial-inner,.testi-inner,.trust-items,.footer-inner,.nav-inner,.about-page-intro-inner,.team-inner,.about-values-inner,.coaching-inner,.curriculum-inner,.career-hero-inner,.why-inner,.who-inner,.apply-inner,.page-hero-inner,.puzzle-inner{padding-left:36px;padding-right:36px}
   .hero-h1{font-size:72px}.sec-h{font-size:46px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:44px}
 }
@@ -449,7 +508,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   .hero-inner,.about-inner,.trial-inner,.portal-inner,.about-page-intro-inner,.career-hero-inner,.why-inner,.curriculum-grid{grid-template-columns:1fr;gap:52px}
   .hero-img-col{order:-1}.hero-h1{font-size:60px}
   .courses-hdr{grid-template-columns:1fr;gap:16px}
-  .courses-grid,.service-cards,.team-grid{grid-template-columns:1fr 1fr}
+  .courses-grid,.service-cards,.team-grid,.winners-grid{grid-template-columns:1fr 1fr}
   .levels-grid{grid-template-columns:1fr;gap:52px}
   .lcard,.curriculum-side{position:static}
   .testi-grid{grid-template-columns:1fr}
@@ -460,85 +519,25 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   .values-grid,.who-grid{grid-template-columns:1fr}
   .nav-links,.nav-right{display:none}
   .nav-ham{display:flex}
+  .puzzle-layout{grid-template-columns:1fr;gap:36px}
+  .puzzle-board{max-width:100%}
 }
 @media(max-width:560px){
   .hero-h1{font-size:46px}.sec-h{font-size:36px}
-  .courses-grid,.service-cards,.team-grid{grid-template-columns:1fr}
+  .courses-grid,.service-cards,.team-grid,.winners-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
-  .hero-inner,.about-inner,.courses-inner,.levels-inner,.portal-inner,.faq-inner,.trial-inner,.testi-inner,.trust-items,.footer-inner,.nav-inner,.page-hero-inner,.about-page-intro-inner,.team-inner,.about-values-inner,.coaching-inner,.curriculum-inner,.career-hero-inner,.why-inner,.who-inner,.apply-inner{padding-left:20px;padding-right:20px}
+  .hero-inner,.about-inner,.courses-inner,.levels-inner,.portal-inner,.faq-inner,.trial-inner,.testi-inner,.trust-items,.footer-inner,.nav-inner,.page-hero-inner,.about-page-intro-inner,.team-inner,.about-values-inner,.coaching-inner,.curriculum-inner,.career-hero-inner,.why-inner,.who-inner,.apply-inner,.puzzle-inner{padding-left:20px;padding-right:20px}
   .form-card{padding:28px 22px}
   .hero-badge{left:-10px;bottom:-14px;padding:12px 16px}
   .page-hero h1{font-size:48px}
-}
-
-/* FLOATING WHATSAPP BUTTON */
-@keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}60%{box-shadow:0 0 0 12px rgba(37,211,102,0)}}
-.wa-float{
-  position:fixed;
-  bottom:28px;
-  right:28px;
-  z-index:999;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:#25d366;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 6px 28px rgba(37,211,102,.45);
-  animation:waPulse 2.4s infinite;
-  transition:transform .2s,box-shadow .2s;
-  cursor:pointer;
-  text-decoration:none;
-}
-.wa-float:hover{
-  transform:scale(1.10) translateY(-2px);
-  box-shadow:0 10px 36px rgba(37,211,102,.60);
-  animation:none;
-}
-.wa-float svg{display:block;flex-shrink:0}
-.wa-tooltip{
-  position:fixed;
-  bottom:36px;
-  right:98px;
-  z-index:998;
-  background:var(--navy-deep);
-  color:rgba(255,255,255,.88);
-  font-family:var(--disp);
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.04em;
-  padding:8px 14px;
-  border-radius:var(--rmd);
-  white-space:nowrap;
-  pointer-events:none;
-  opacity:0;
-  transform:translateX(6px);
-  transition:opacity .2s,transform .2s;
-  box-shadow:0 4px 18px rgba(20,25,41,.25);
-}
-.wa-tooltip::after{
-  content:"";
-  position:absolute;
-  right:-6px;
-  top:50%;
-  transform:translateY(-50%);
-  border:6px solid transparent;
-  border-right:none;
-  border-left-color:var(--navy-deep);
-}
-.wa-float:hover + .wa-tooltip,
-.wa-wrap:hover .wa-tooltip{opacity:1;transform:translateX(0)}
-.wa-wrap{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center}
-@media(max-width:560px){
   .wa-wrap{bottom:18px;right:18px}
   .wa-tooltip{display:none}
+  .psq{font-size:20px}
 }
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-inner">
     <div class="topbar-dot"></div>
@@ -547,13 +546,10 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   </div>
 </div>
 
-<!-- NAV -->
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
     <div class="nav-logo" onclick="showPage('home')">
-      <div class="nav-logo-box">
-        <img src="assets/logo-v3.png" alt="C4Chess logo" class="logo-img">
-      </div>
+      <div class="nav-logo-box"><img src="assets/logo-v3.png" alt="C4Chess logo" class="logo-img"></div>
       <div>
         <div class="nav-logo-name">C4Chess</div>
         <div class="nav-logo-sub">Chess Training Institute</div>
@@ -568,12 +564,9 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     </div>
     <div class="nav-right">
       <button class="nav-dash" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')">
-        <div class="nav-dash-ico">♟</div>
-        My Dashboard
+        <div class="nav-dash-ico">♟</div>My Dashboard
       </button>
-      <button class="nav-cta" onclick="showPage('home');setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">
-        Book a Free Trial
-      </button>
+      <button class="nav-cta" onclick="showPage('home');setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">Book a Free Trial</button>
     </div>
     <button class="nav-ham" id="navHam" onclick="toggleMob()"><span></span><span></span><span></span></button>
   </div>
@@ -583,14 +576,12 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     <span class="nav-link" onclick="showPage('coaching');toggleMob()">Coaching</span>
     <span class="nav-link" onclick="showPage('career');toggleMob()">Career</span>
     <span class="nav-link" onclick="showPage('home');toggleMob();setTimeout(()=>document.getElementById('faqSection').scrollIntoView({behavior:'smooth'}),100)">FAQ</span>
-    <button class="nav-dash mob-dash" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')">
-      <div class="nav-dash-ico">♟</div>My Dashboard
-    </button>
+    <button class="nav-dash mob-dash" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')"><div class="nav-dash-ico">♟</div>My Dashboard</button>
     <button class="nav-cta mob-cta" onclick="showPage('home');toggleMob();setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">Book a Free Trial</button>
   </div>
 </nav>
 
-<!-- ═══ HOME PAGE ═══ -->
+<!-- ═══ HOME ═══ -->
 <div class="page active" id="page-home">
 
 <section class="hero">
@@ -611,9 +602,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
       </div>
     </div>
     <div class="hero-img-col">
-      <div class="hero-frame">
-        <img src="assets/hero-student.png" alt="C4Chess student learning online" class="hero-photo">
-      </div>
+      <div class="hero-frame"><img src="assets/hero-student.png" alt="C4Chess student learning online" class="hero-photo"></div>
       <div class="hero-tag">Live Classes</div>
       <div class="hero-badge">
         <div class="hero-badge-ico">🏆</div>
@@ -635,16 +624,14 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 <section class="about">
   <div class="about-inner">
     <div class="about-img-wrap sr">
-      <div class="about-img-frame">
-        <img src="assets/collage.jpg" alt="C4Chess student collage" class="about-main-photo">
-      </div>
+      <div class="about-img-frame"><img src="assets/collage.jpg" alt="C4Chess student collage" class="about-main-photo"></div>
       <div class="about-img-accent"></div>
     </div>
     <div class="sr d1">
       <div class="eyebrow">About C4Chess</div>
       <h2 class="sec-h">Chess as a <em>tool for life.</em></h2>
       <p class="about-body">C4Chess is a global online chess coaching academy dedicated to helping players of all ages and skill levels improve through structured training and expert guidance.</p>
-      <p class="about-body2">Our mission is to make high-quality chess coaching accessible worldwide, allowing students to learn and grow from anywhere. Chess develops critical thinking, concentration, and strategic decision-making.</p>
+      <p class="about-body2">Our mission is to make high-quality chess coaching accessible worldwide, allowing students to learn and grow from anywhere.</p>
       <div class="pillars">
         <div class="pillar"><div class="pillar-ico">📐</div><div><div class="pillar-title">Structured Learning Path</div><div class="pillar-desc">Progressive curriculum from beginner to advanced</div></div></div>
         <div class="pillar"><div class="pillar-ico">🔴</div><div><div class="pillar-title">Live Interactive Classes</div><div class="pillar-desc">Real-time coaching with expert trainers</div></div></div>
@@ -674,25 +661,80 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     <div class="sr"><div class="eyebrow">Skill Levels</div><h2 class="sec-h">Where do <em>you fit?</em></h2></div>
     <div class="levels-grid">
       <div class="levels-list">
-        <div class="lrow sr"><div class="lrow-n">1</div><div><span class="lrow-tag">Beginner</span><div class="lrow-name">Pawn Pioneer</div><p class="lrow-desc">Learning the board, piece movements, and fundamental checkmate patterns.</p></div></div>
-        <div class="lrow sr d1"><div class="lrow-n">2</div><div><span class="lrow-tag">Elementary</span><div class="lrow-name">Knight's Quest</div><p class="lrow-desc">Basic tactics, forks, pins, skewers, and simple endgames.</p></div></div>
-        <div class="lrow sr d2"><div class="lrow-n">3</div><div><span class="lrow-tag">Intermediate</span><div class="lrow-name">Bishop's Strategy</div><p class="lrow-desc">Positional understanding, opening principles, and tactical combinations.</p></div></div>
-        <div class="lrow sr d3"><div class="lrow-n">4</div><div><span class="lrow-tag">Advanced</span><div class="lrow-name">Rook's Endgame</div><p class="lrow-desc">Deep calculation, complex endgames, and tournament psychology.</p></div></div>
-        <div class="lrow sr"><div class="lrow-n">5</div><div><span class="lrow-tag">Elite</span><div class="lrow-name">Queen's Gambit</div><p class="lrow-desc">Grandmaster analysis, FIDE tournament preparation, opening theory.</p></div></div>
+        <div class="lrow sr" data-level="1"><div class="lrow-n">1</div><div><span class="lrow-tag">Beginner</span><div class="lrow-name">Pawn Pioneer</div><p class="lrow-desc">Learning the board, piece movements, and fundamental checkmate patterns.</p></div></div>
+        <div class="lrow sr d1" data-level="2"><div class="lrow-n">2</div><div><span class="lrow-tag">Elementary</span><div class="lrow-name">Knight's Quest</div><p class="lrow-desc">Basic tactics, forks, pins, skewers, and simple endgames.</p></div></div>
+        <div class="lrow sr d2" data-level="3"><div class="lrow-n">3</div><div><span class="lrow-tag">Intermediate</span><div class="lrow-name">Bishop's Strategy</div><p class="lrow-desc">Positional understanding, opening principles, and tactical combinations.</p></div></div>
+        <div class="lrow sr d3" data-level="4"><div class="lrow-n">4</div><div><span class="lrow-tag">Advanced</span><div class="lrow-name">Rook's Endgame</div><p class="lrow-desc">Deep calculation, complex endgames, and tournament psychology.</p></div></div>
+        <div class="lrow sr" data-level="5"><div class="lrow-n">5</div><div><span class="lrow-tag">Elite</span><div class="lrow-name">Queen's Gambit</div><p class="lrow-desc">Grandmaster analysis, FIDE tournament preparation, opening theory.</p></div></div>
       </div>
-      <div class="lcard sr d1">
+      <div class="lcard sr d1" id="skillTracker">
         <div class="lcard-label">Skill Progress Tracker</div>
         <div class="pgrp">
           <div class="pgrp-name">Tactical Skills</div>
-          <div class="prow"><span class="pskill">Tactics</span><div class="ptrack"><div class="pfill" style="width:85%"></div></div><span class="ppct">85%</span></div>
-          <div class="prow"><span class="pskill">Patterns</span><div class="ptrack"><div class="pfill" style="width:72%"></div></div><span class="ppct">72%</span></div>
-          <div class="prow"><span class="pskill">Calc.</span><div class="ptrack"><div class="pfill" style="width:60%"></div></div><span class="ppct">60%</span></div>
+          <div class="prow"><span class="pskill">Tactics</span><div class="ptrack"><div class="pfill" id="bar-tactics"></div></div><span class="ppct" id="pct-tactics">0%</span></div>
+          <div class="prow"><span class="pskill">Patterns</span><div class="ptrack"><div class="pfill" id="bar-patterns"></div></div><span class="ppct" id="pct-patterns">0%</span></div>
+          <div class="prow"><span class="pskill">Calc.</span><div class="ptrack"><div class="pfill" id="bar-calc"></div></div><span class="ppct" id="pct-calc">0%</span></div>
         </div>
         <div class="pgrp">
           <div class="pgrp-name">Strategic Skills</div>
-          <div class="prow"><span class="pskill">Openings</span><div class="ptrack"><div class="pfill" style="width:78%"></div></div><span class="ppct">78%</span></div>
-          <div class="prow"><span class="pskill">Positional</span><div class="ptrack"><div class="pfill" style="width:65%"></div></div><span class="ppct">65%</span></div>
-          <div class="prow"><span class="pskill">Endgame</span><div class="ptrack"><div class="pfill" style="width:55%"></div></div><span class="ppct">55%</span></div>
+          <div class="prow"><span class="pskill">Openings</span><div class="ptrack"><div class="pfill" id="bar-openings"></div></div><span class="ppct" id="pct-openings">0%</span></div>
+          <div class="prow"><span class="pskill">Positional</span><div class="ptrack"><div class="pfill" id="bar-positional"></div></div><span class="ppct" id="pct-positional">0%</span></div>
+          <div class="prow"><span class="pskill">Endgame</span><div class="ptrack"><div class="pfill" id="bar-endgame"></div></div><span class="ppct" id="pct-endgame">0%</span></div>
+        </div>
+        <div id="tracker-level-label" style="margin-top:18px;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);text-align:center;opacity:0;transition:opacity .3s"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHESS PUZZLE CHALLENGE ═══ -->
+<section class="puzzle-section" id="puzzleSection">
+  <div class="puzzle-inner">
+    <div class="puzzle-hdr sr">
+      <div class="eyebrow" style="color:var(--gold)">♟ Challenge Yourself</div>
+      <h2 class="sec-h">Can you <em>find the move?</em></h2>
+      <p class="sec-lead">Spot the winning idea. These are the same patterns our coaches drill every week.</p>
+    </div>
+    <div class="puzzle-layout sr d1">
+      <div class="puzzle-board-wrap">
+        <div class="puzzle-board-and-ranks">
+          <div class="puzzle-coord-ranks" id="rankLabels">
+            <span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+          </div>
+          <div class="puzzle-board" id="chessBoard"></div>
+        </div>
+        <div class="puzzle-coord-files"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
+      </div>
+      <div class="puzzle-panel">
+        <!-- Single clean meta row -->
+        <div class="puzzle-meta">
+          <div class="puzzle-counter" id="puzzleCounter">Puzzle 1 of 5</div>
+          <div class="puzzle-type" id="puzzleType">Mate in 1</div>
+        </div>
+        <!-- Stats row: rating + streak + timer -->
+        <div class="puzzle-stats-row">
+          Rating: <span id="rating">800</span> &nbsp;·&nbsp;
+          Streak: <span id="streak">0</span> 🔥 &nbsp;·&nbsp;
+          <span id="timer">60s</span>
+        </div>
+        <div class="puzzle-prompt" id="puzzlePrompt">Find the best move.</div>
+        <div class="puzzle-feedback" id="puzzleFeedback"></div>
+        <div class="puzzle-progress-row">
+          <div id="pd0" class="puzzle-dot active"></div>
+          <div id="pd1" class="puzzle-dot"></div>
+          <div id="pd2" class="puzzle-dot"></div>
+          <div id="pd3" class="puzzle-dot"></div>
+          <div id="pd4" class="puzzle-dot"></div>
+        </div>
+        <button class="puzzle-hint-btn" id="hintBtn" onclick="showHint()">💡 Show Hint</button>
+        <div class="puzzle-hint-text" id="hintText"></div>
+        <div class="puzzle-cta" id="puzzleCta" style="display:none">
+          <div class="puzzle-cta-title">You've got the instinct! 🎉</div>
+          <p class="puzzle-cta-body">These are the patterns C4Chess coaches build on every week. Want to go deeper?</p>
+          <div class="puzzle-cta-btns">
+            <button class="btn btn-primary" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')">Enter the Portal →</button>
+            <button class="btn btn-primary" style="background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.40);box-shadow:none" onclick="document.getElementById('trialSection').scrollIntoView({behavior:'smooth'})">Book a Free Trial</button>
+          </div>
         </div>
       </div>
     </div>
@@ -702,13 +744,10 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 <!-- ═══ TESTIMONIALS + WINNERS ═══ -->
 <section class="testi">
   <div class="testi-inner">
-
     <div class="testi-top">
       <div class="sr"><div class="eyebrow">Student Stories</div><h2 class="sec-h">What our <em>students say.</em></h2></div>
       <button class="btn btn-ghost sr d1" onclick="document.getElementById('trialSection').scrollIntoView({behavior:'smooth'})">Join Them →</button>
     </div>
-
-    <!-- ── STUDENT ACHIEVEMENTS ── -->
     <div class="winners-section sr">
       <div class="winners-divider">
         <div class="winners-divider-line"></div>
@@ -716,18 +755,8 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
         <div class="winners-divider-line right"></div>
       </div>
       <div class="winners-grid">
-
-        <!-- Kounish Ghosh — Champion U-9 -->
         <div class="wcard sr">
-          <div class="wcard-img-wrap">
-            <img
-              src="assets/Kounish.jpeg"
-              alt="Kounish Ghosh — Under-9 Champion, Nadia District Chess Championship 2026"
-              class="wcard-photo"
-            >
-            <div class="wcard-overlay"></div>
-            <div class="wcard-trophy">🥇</div>
-          </div>
+          <div class="wcard-img-wrap"><img src="assets/Kounish.jpeg" alt="Kounish Ghosh — Under-9 Champion, Nadia District Chess Championship 2026" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">🥇</div></div>
           <div class="wcard-info">
             <div class="wcard-tournament">Nadia District Chess Championship 2026</div>
             <div class="wcard-name">Kounish Ghosh</div>
@@ -736,18 +765,8 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
             <div class="wcard-badge wcard-badge-gold">🏆 Champion</div>
           </div>
         </div>
-
-        <!-- Ayaansh — Runner-Up Denver -->
         <div class="wcard sr d1">
-          <div class="wcard-img-wrap">
-            <img
-              src="assets/Ayaansh.jpeg"
-              alt="Ayaansh — 2nd Place, School District Chess Tournament, Denver"
-              class="wcard-photo"
-            >
-            <div class="wcard-overlay"></div>
-            <div class="wcard-trophy">🥈</div>
-          </div>
+          <div class="wcard-img-wrap"><img src="assets/Ayaansh.jpeg" alt="Ayaansh — 2nd Place, School District Chess Tournament, Denver" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">🥈</div></div>
           <div class="wcard-info">
             <div class="wcard-tournament">School District Chess Tournament · Denver</div>
             <div class="wcard-name">Ayaansh</div>
@@ -755,18 +774,8 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
             <div class="wcard-badge wcard-badge-silver">🥈 Runner-Up</div>
           </div>
         </div>
-
-        <!-- Dhritabrata Ray — All Bengal -->
         <div class="wcard sr d2">
-          <div class="wcard-img-wrap">
-            <img
-              src="assets/Dhritabrata.jpeg"
-              alt="Dhritabrata Ray — 8th All Bengal Age Group Rapid Chess Championship"
-              class="wcard-photo"
-            >
-            <div class="wcard-overlay"></div>
-            <div class="wcard-trophy">♟</div>
-          </div>
+          <div class="wcard-img-wrap"><img src="assets/Dhritabrata.jpeg" alt="Dhritabrata Ray — 8th All Bengal Age Group Rapid Chess Championship" class="wcard-photo"><div class="wcard-overlay"></div><div class="wcard-trophy">♟</div></div>
           <div class="wcard-info">
             <div class="wcard-tournament">8th All Bengal Age Group Rapid Chess Championship</div>
             <div class="wcard-name">Dhritabrata Ray</div>
@@ -774,18 +783,13 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
             <div class="wcard-badge wcard-badge-pending">🏅 Finalist</div>
           </div>
         </div>
-
       </div>
     </div>
-    <!-- /STUDENT ACHIEVEMENTS -->
-
-    <!-- ── TESTIMONIAL QUOTE CARDS ── -->
     <div class="testi-grid">
       <div class="tcard sr"><div class="tstars">★★★★★</div><p class="tquote">"My son went from knowing basic moves to winning his school tournament in just 8 months."</p><div class="trule"></div><div class="tname">Priya Sharma</div><div class="twho">Parent · Mumbai</div></div>
       <div class="tcard feat sr d1"><div class="tstars">★★★★★</div><p class="tquote">"The structured curriculum is unlike anything else. I improved 300 rating points in one year."</p><div class="trule"></div><div class="tname">Arjun Mehta</div><div class="twho">Student, Age 14 · Delhi</div></div>
       <div class="tcard sr d2"><div class="tstars">★★★★★</div><p class="tquote">"The coaches genuinely care about each student's growth. The live classes are engaging and fun."</p><div class="trule"></div><div class="tname">Sarah Johnson</div><div class="twho">Parent · Singapore</div></div>
     </div>
-
   </div>
 </section>
 
@@ -810,12 +814,8 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
         <div class="prole"><div class="prole-ico">👨‍🏫</div><div><div class="prole-name">Coach</div><div class="prole-desc">Manage students & sessions</div></div></div>
         <div class="prole"><div class="prole-ico">👪</div><div><div class="prole-name">Parent</div><div class="prole-desc">Monitor your child's progress</div></div></div>
       </div>
-      <button class="nav-dash mob-dash" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')">
-        <div class="nav-dash-ico">♟</div>My Dashboard
-      </button>
-      <button class="nav-cta mob-cta" onclick="showPage('home');setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">
-        Book a Free Trial
-      </button>
+      <button class="pbtn" onclick="window.open('https://portal.c4chess.com/portal/dashboard','_blank')">Go to My Dashboard →</button>
+      <button class="pbtn2" onclick="showPage('home');setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">Book a Free Trial</button>
     </div>
   </div>
 </section>
@@ -827,7 +827,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
       <div class="sr">
         <p class="faq-aside-body">Can't find your answer? Reach out to us directly — we respond within 24 hours.</p>
         <div class="faq-contacts">
-          <div class="faq-citem"><div class="faq-cico">✉</div><span>Email: <a href="mailto:contact&#64;c4chess.com" style="color:var(--navy);font-weight:500">contact&#64;c4chess&#46;com</a></span></div>
+          <div class="faq-citem"><div class="faq-cico">✉</div><span>Email: <a href="/cdn-cgi/l/email-protection#5a3935342e3b392e1a396e39323f292974393537">contact&#64;c4chess&#46;com</a></span></div>
           <div class="faq-citem"><div class="faq-cico">📞</div><span>Phone: <a href="tel:+919641019781">+91-9641019781</a></span></div>
         </div>
       </div>
@@ -878,7 +878,6 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 
 </div><!-- /page-home -->
 
-
 <!-- ═══ ABOUT PAGE ═══ -->
 <div class="page" id="page-about">
 <section class="page-hero">
@@ -892,33 +891,22 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   <div class="about-page-intro-inner">
     <div class="about-page-text sr">
       <h2>Education × Chess × <em>Psychology.</em></h2>
-      <p>C4Chess is a global online chess coaching academy dedicated to helping players of all ages and skill levels improve through structured training and expert guidance. Our mission is to make high-quality chess coaching accessible worldwide.</p>
-      <p>Chess is more than just a game. It develops critical thinking, concentration, problem-solving ability, and strategic decision-making. At C4Chess, our coaching programs are designed to build these skills step by step.</p>
+      <p>C4Chess is a global online chess coaching academy dedicated to helping players of all ages and skill levels improve through structured training and expert guidance.</p>
+      <p>Chess develops critical thinking, concentration, problem-solving ability, and strategic decision-making. Our programs are designed to build these skills step by step.</p>
       <p>We offer structured programs for beginners, intermediate players, advanced tournament competitors, and adults looking to rediscover their passion for chess.</p>
       <p>C4Chess is an evolving ecosystem — education × chess × psychology × technology. We don't ask where you come from. We care about where you want to go.</p>
       <p style="font-family:var(--serif);font-size:20px;font-style:italic;color:var(--accent);margin-top:24px">You didn't come this far to stop!</p>
     </div>
-    <div class="about-img-big sr d1">
-      <img src="assets/page-big-image.png" alt="C4Chess about page feature" class="about-page-photo">
-    </div>
+    <div class="about-img-big sr d1"><img src="assets/page-big-image.png" alt="C4Chess about page feature" class="about-page-photo"></div>
   </div>
 </section>
 <section class="team-section">
   <div class="team-inner">
     <div class="sr"><div class="eyebrow">Our Team</div><h2 class="sec-h">Who we <em>are.</em></h2></div>
     <div class="team-grid">
-      <div class="team-card sr">
-        <div class="team-img"><img src="assets/Manabi.png" alt="Manabi Chouhan" class="team-photo"><div class="team-img-overlay"></div></div>
-        <div class="team-info"><div class="team-name">Manabi Chouhan</div><div class="team-role">Founder & Mentor</div><p class="team-bio">A passionate chess educator with years of competitive experience. Manabi built C4Chess with a vision to make quality chess education accessible to every ambitious learner worldwide.</p></div>
-      </div>
-      <div class="team-card sr d1">
-        <div class="team-img"><img src="assets/Surya.png" alt="Surya Tribedy" class="team-photo"><div class="team-img-overlay"></div></div>
-        <div class="team-info"><div class="team-name">Surya Tribedy</div><div class="team-role">Co-Founder & Analyst</div><p class="team-bio">A chess analyst and strategic thinker who designs the curriculum and ensures every student's learning journey is backed by deep positional and tactical analysis.</p></div>
-      </div>
-      <div class="team-card sr d2">
-        <div class="team-img"><img src="assets/Shaati.png" alt="Shaati Majumder" class="team-photo"><div class="team-img-overlay"></div></div>
-        <div class="team-info"><div class="team-name">Shaati Majumder</div><div class="team-role">Operations & Student Support</div><p class="team-bio">The backbone of C4Chess operations, Shaati ensures every student and parent has a seamless experience — from enrollment to their first tournament win.</p></div>
-      </div>
+      <div class="team-card sr"><div class="team-img"><img src="assets/Manabi.png" alt="Manabi Chouhan" class="team-photo"><div class="team-img-overlay"></div></div><div class="team-info"><div class="team-name">Manabi Chouhan</div><div class="team-role">Founder & Mentor</div><p class="team-bio">A passionate chess educator with years of competitive experience. Manabi built C4Chess with a vision to make quality chess education accessible to every ambitious learner worldwide.</p></div></div>
+      <div class="team-card sr d1"><div class="team-img"><img src="assets/Surya.png" alt="Surya Tribedy" class="team-photo"><div class="team-img-overlay"></div></div><div class="team-info"><div class="team-name">Surya Tribedy</div><div class="team-role">Co-Founder & Analyst</div><p class="team-bio">A chess analyst and strategic thinker who designs the curriculum and ensures every student's learning journey is backed by deep positional and tactical analysis.</p></div></div>
+      <div class="team-card sr d2"><div class="team-img"><img src="assets/Shaati.png" alt="Shaati Majumder" class="team-photo"><div class="team-img-overlay"></div></div><div class="team-info"><div class="team-name">Shaati Majumder</div><div class="team-role">Operations & Student Support</div><p class="team-bio">The backbone of C4Chess operations, Shaati ensures every student and parent has a seamless experience — from enrollment to their first tournament win.</p></div></div>
     </div>
   </div>
 </section>
@@ -935,7 +923,6 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 </section>
 </div><!-- /page-about -->
 
-
 <!-- ═══ COACHING PAGE ═══ -->
 <div class="page" id="page-coaching">
 <section class="page-hero">
@@ -949,9 +936,9 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   <div class="coaching-inner">
     <div class="sr"><div class="eyebrow">Our Services</div><h2 class="sec-h">Choose your <em>path.</em></h2><p class="sec-lead">Tailored chess coaching designed for steady, lasting improvement.</p></div>
     <div class="service-cards">
-      <div class="service-card sr"><div class="service-img"><img src="assets/Personal-Coaching.png" alt="Personal coaching" class="service-photo"></div><div class="service-body"><div class="service-title">Personal Coaching</div><p class="service-desc">One-on-one sessions crafted to fit your unique learning pace and goals. Fully personalized attention from expert coaches who know your game inside out.</p></div></div>
-      <div class="service-card sr d1"><div class="service-img"><img src="assets/Group-Classes.png" alt="Group classes" class="service-photo"></div><div class="service-body"><div class="service-title">Group Classes</div><p class="service-desc">Collaborative lessons that build skills through shared challenges and peer feedback. Learn alongside motivated students at the same level.</p></div></div>
-      <div class="service-card sr d2"><div class="service-img"><img src="assets/Specialized-Classes.png" alt="Specialized classes" class="service-photo"></div><div class="service-body"><div class="service-title">Specialized Classes</div><p class="service-desc">Deep dives into openings, tactics, and endgames to sharpen your game for FIDE-rated tournaments. For the serious competitor.</p></div></div>
+      <div class="service-card sr"><div class="service-img"><img src="assets/Personal-Coaching.png" alt="Personal coaching" class="service-photo"></div><div class="service-body"><div class="service-title">Personal Coaching</div><p class="service-desc">One-on-one sessions crafted to fit your unique learning pace and goals.</p></div></div>
+      <div class="service-card sr d1"><div class="service-img"><img src="assets/Group-Classes.png" alt="Group classes" class="service-photo"></div><div class="service-body"><div class="service-title">Group Classes</div><p class="service-desc">Collaborative lessons that build skills through shared challenges and peer feedback.</p></div></div>
+      <div class="service-card sr d2"><div class="service-img"><img src="assets/Specialized-Classes.png" alt="Specialized classes" class="service-photo"></div><div class="service-body"><div class="service-title">Specialized Classes</div><p class="service-desc">Deep dives into openings, tactics, and endgames to sharpen your game for FIDE-rated tournaments.</p></div></div>
     </div>
   </div>
 </section>
@@ -980,7 +967,6 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 </section>
 </div><!-- /page-coaching -->
 
-
 <!-- ═══ CAREER PAGE ═══ -->
 <div class="page" id="page-career">
 <section class="page-hero" style="background:linear-gradient(135deg,#1d2540,#2c3a60)">
@@ -996,14 +982,11 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     <div class="career-hero-text sr">
       <div class="eyebrow">Join Our Team</div>
       <h2>Careers at <em>C4Chess.</em></h2>
-      <p>C4Chess is a structured online chess academy committed to delivering high-quality chess coaching through live interactive classes. We provide a clear curriculum framework, training support, and a professional teaching environment.</p>
-      <p>As part of the C4Chess team, you will work with motivated young learners, follow a well-designed curriculum roadmap, and grow within a professional online academy that values discipline and clarity in instruction.</p>
+      <p>C4Chess is a structured online chess academy committed to delivering high-quality chess coaching through live interactive classes.</p>
       <p>We value discipline, clarity in instruction, and a passion for developing strategic thinking in students.</p>
       <button class="btn btn-primary" style="margin-top:24px" onclick="document.getElementById('applySection').scrollIntoView({behavior:'smooth'})">Apply Now</button>
     </div>
-    <div class="career-hero-img sr d1">
-      <img src="assets/Career-Hero.jpg" alt="Career at C4Chess" class="career-photo">
-    </div>
+    <div class="career-hero-img sr d1"><img src="assets/Career-Hero.jpg" alt="Career at C4Chess" class="career-photo"></div>
   </div>
 </section>
 <section class="why-c4chess">
@@ -1011,8 +994,7 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     <div class="why-text sr">
       <div class="eyebrow">Why C4Chess?</div>
       <h2>An evolving <em>ecosystem.</em></h2>
-      <p>C4Chess is an evolving ecosystem — education × chess × psychology × technology. We don't ask where you come from. We care about where you want to go.</p>
-      <p>We think long-term. We don't micromanage. We speak honestly. We reward effort, not ego. We grow together.</p>
+      <p>Education × chess × psychology × technology. We don't ask where you come from. We care about where you want to go.</p>
       <div class="why-quote">
         <div class="why-quote-text">"Chess is something more than a game. It is an intellectual diversion which has certain artistic qualities."</div>
         <div class="why-quote-attr">— José Raúl Capablanca</div>
@@ -1028,14 +1010,11 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 </section>
 <section class="who-can-join">
   <div class="who-inner">
-    <div class="sr">
-      <h2 class="who-title">Who can <em>join C4Chess?</em></h2>
-      <p class="who-sub">We welcome people who want to <strong style="color:rgba(255,255,255,.78)">contribute, learn, and grow.</strong></p>
-    </div>
+    <div class="sr"><h2 class="who-title">Who can <em>join C4Chess?</em></h2><p class="who-sub">We welcome people who want to <strong style="color:rgba(255,255,255,.78)">contribute, learn, and grow.</strong></p></div>
     <div class="who-grid">
-      <div class="who-card sr"><div class="who-card-title">You can join us as:</div><ul><li>Chess Coach / Trainer</li><li>Curriculum Developer</li><li>Game Analyst / Opening Researcher</li><li>Operations & Core Team Member</li><li>Content & Community Manager</li><li>Tech / Product / Platform Contributor</li><li>Marketing & Growth Strategist</li><li>Creative Thinker with New Ideas</li></ul></div>
-      <div class="who-card sr d1"><div class="who-card-title">What you gain at C4Chess:</div><ul><li>Continuous learning & mentorship</li><li>Clear growth paths (skill + responsibility)</li><li>Early-stage impact</li><li>Respect, leadership, and trust</li><li>A culture that rewards effort and integrity</li></ul><div style="margin-top:18px;font-size:13px;color:rgba(255,255,255,.45);line-height:1.65">This is a place where your contribution is visible — and valued.</div></div>
-      <div class="who-card sr d2"><div class="who-card-title">Our Culture:</div><ul><li>We think long-term</li><li>We don't micromanage</li><li>We speak honestly</li><li>We reward effort, not ego</li><li>We grow together</li></ul><div style="margin-top:18px;font-size:13px;color:rgba(255,255,255,.45);line-height:1.65">C4Chess is for those who want to build something meaningful.</div></div>
+      <div class="who-card sr"><div class="who-card-title">You can join us as:</div><ul><li>Chess Coach / Trainer</li><li>Curriculum Developer</li><li>Game Analyst / Opening Researcher</li><li>Operations & Core Team Member</li><li>Content & Community Manager</li><li>Tech / Product / Platform Contributor</li><li>Marketing & Growth Strategist</li></ul></div>
+      <div class="who-card sr d1"><div class="who-card-title">What you gain:</div><ul><li>Continuous learning & mentorship</li><li>Clear growth paths</li><li>Early-stage impact</li><li>Respect, leadership, and trust</li><li>A culture that rewards effort</li></ul></div>
+      <div class="who-card sr d2"><div class="who-card-title">Our Culture:</div><ul><li>We think long-term</li><li>We don't micromanage</li><li>We speak honestly</li><li>We reward effort, not ego</li><li>We grow together</li></ul></div>
     </div>
   </div>
 </section>
@@ -1044,17 +1023,16 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     <div class="eyebrow">Apply Now</div>
     <h2 class="sec-h">Join <em>the team.</em></h2>
     <p class="sec-lead">If you're serious about learning and contributing, we'd love to hear from you.</p>
-    <div class="apply-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9af2e8daf9aef9f2ffe9e9b4f9f5f7">[email&#160;protected]</a></div>
+    <div class="apply-email">hr&#64;c4chess&#46;com</div>
     <p class="apply-note">Include a short introduction and how you'd like to contribute.</p>
     <div class="apply-cta-row">
-      <a href="/cdn-cgi/l/email-protection#afc7ddefcc9bccc7cadcdc81ccc0c2" class="btn btn-primary">Send Application →</a>
+      <a href="/cdn-cgi/l/email-protection#bcd4cefcdf88dfd4d9cfcf92dfd3d1" class="btn btn-primary">Send Application →</a>
       <button class="btn btn-ghost" onclick="showPage('home');setTimeout(()=>document.getElementById('trialSection').scrollIntoView({behavior:'smooth'}),100)">Book a Free Trial</button>
     </div>
     <div class="apply-tagline">Build your career. Build minds. Join C4Chess.</div>
   </div>
 </section>
 </div><!-- /page-career -->
-
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -1099,9 +1077,9 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
       </div>
       <div>
         <div class="footer-col-h">Contact</div>
-        <div class="fcrow">✉ <a href="/cdn-cgi/l/email-protection#d6b5b9b8a2b7b5a296b5e2b5beb3a5a5f8b5b9bb" style="color:rgba(170,184,216,.76)"><span class="__cf_email__" data-cfemail="85e6eaebf1e4e6f1c5e6b1e6ede0f6f6abe6eae8">[email&#160;protected]</span></a></div>
+        <div class="fcrow">✉ <a href="/cdn-cgi/l/email-protection#05666a6b71646671456631666d6076762b666a68" style="color:rgba(170,184,216,.76)">contact&#64;c4chess&#46;com</a></div>
         <div class="fcrow">📞 <a href="tel:+919641019781" style="color:rgba(170,184,216,.76)">+91-9641019781</a></div>
-        <div class="fcrow">✉ <a href="/cdn-cgi/l/email-protection#fd958fbd9ec99e95988e8ed39e9290" style="color:rgba(170,184,216,.76)"><span class="__cf_email__" data-cfemail="3d554f7d5e095e55584e4e135e5250">[email&#160;protected]</span></a> <span style="font-size:11px;color:rgba(255,255,255,.28)">(Careers)</span></div>
+        <div class="fcrow">✉ <a href="/cdn-cgi/l/email-protection#1a72685a792e79727f696934797577" style="color:rgba(170,184,216,.76)">hr&#64;c4chess&#46;com</a> <span style="font-size:11px;color:rgba(255,255,255,.28)">(Careers)</span></div>
       </div>
     </div>
     <div class="footer-rule"></div>
@@ -1113,12 +1091,13 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ─── NAV ─────────────────────────────────────────────── */
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('[id^="nl-"]').forEach(l=>l.classList.remove('on'));
   const nl=document.getElementById('nl-'+id);
-  if(nl)nl.classList.add('on');
+  if(nl) nl.classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});
   setTimeout(triggerSR,100);
 }
@@ -1133,34 +1112,334 @@ function toggleFaq(el){
   const item=el.parentElement;
   const wasOpen=item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!wasOpen)item.classList.add('open');
+  if(!wasOpen) item.classList.add('open');
 }
 function submitForm(){
   document.getElementById('fForm').style.display='none';
   document.getElementById('fSuccess').style.display='block';
 }
+
+/* ─── SCROLL REVEAL ───────────────────────────────────── */
 function triggerSR(){
   const obs=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
   },{threshold:0.12});
   document.querySelectorAll('.page.active .sr:not(.in)').forEach(el=>obs.observe(el));
 }
+
+/* ─── SKILL TRACKER ──────────────────────────────────── */
+function initSkillTracker(){
+  // [tactics, patterns, calc, openings, positional, endgame, label]
+  const STATS={
+    1:[12,8,5,6,5,4,'Pawn Pioneer'],
+    2:[32,28,20,18,14,12,"Knight's Quest"],
+    3:[55,48,40,42,36,28,"Bishop's Strategy"],
+    4:[72,65,58,65,55,50,"Rook's Endgame"],
+    5:[92,88,82,88,80,78,"Queen's Gambit"]
+  };
+  const KEYS=['tactics','patterns','calc','openings','positional','endgame'];
+
+  function setLevel(n){
+    const s=STATS[n]; if(!s) return;
+    KEYS.forEach((k,i)=>{
+      document.getElementById('bar-'+k).style.width=s[i]+'%';
+      document.getElementById('pct-'+k).textContent=s[i]+'%';
+    });
+    const lbl=document.getElementById('tracker-level-label');
+    lbl.textContent='▸ '+s[6]; lbl.style.opacity='1';
+    document.querySelectorAll('.lrow').forEach(r=>r.classList.remove('lrow-active'));
+    document.querySelector(`.lrow[data-level="${n}"]`)?.classList.add('lrow-active');
+  }
+
+  setTimeout(()=>setLevel(1),400);
+
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) setLevel(parseInt(e.target.dataset.level)); });
+  },{threshold:0.55});
+  document.querySelectorAll('.lrow[data-level]').forEach(r=>obs.observe(r));
+}
+
+/* ─── CHESS PUZZLE ENGINE ────────────────────────────── */
+function initChessPuzzles(){
+  const boardEl=document.getElementById('chessBoard');
+  if(!boardEl) return;
+
+  const PIECE_GLYPHS={
+    p:'♟',r:'♜',n:'♞',b:'♝',q:'♛',k:'♚',
+    P:'♙',R:'♖',N:'♘',B:'♗',Q:'♕',K:'♔'
+  };
+
+  /*
+   * Each puzzle defines:
+   *   fen      — exact position string
+   *   fromSq   — correct piece's square in algebraic e.g. "a1"
+   *   toSq     — destination square in algebraic e.g. "a8"
+   *   type     — label shown in badge
+   *   prompt   — instruction text
+   *   hint     — hint text
+   *
+   * Board is rendered with the side-to-move at the BOTTOM:
+   *   white to move → rank 1 at bottom (normal)
+   *   black to move → rank 8 at bottom (flipped)
+   */
+  const PUZZLES=[
+    {
+      fen:   '6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1',
+      fromSq:'a1', toSq:'a8',
+      type:  'Mate in 1',
+      prompt:'White to move — checkmate in one.',
+      hint:  'Bring the rook all the way up the a-file.'
+    },
+    {
+      fen:   '5rk1/2b2p1p/1p1q1np1/p7/8/2N5/PP3PPP/R2QR2K b - - 0 1',
+      fromSq:'d6', toSq:'h2',
+      type:  'Mate in 1',
+      prompt:'Black to move — checkmate in one.',
+      hint:  'Slide the queen diagonally to h2.'
+    },
+    {
+      fen:   '8/p3q3/2p2p1k/1p4p1/2n5/1Q2N3/PPP2PPP/6K1 w - - 0 1',
+      fromSq:'e3', toSq:'f5',
+      type:  'Knight Fork',
+      prompt:'White to move — fork multiple pieces with the knight.',
+      hint:  'A knight on f5 attacks both the queen and the king at once.'
+    },
+    {
+      fen:   'r6k/1pp2ppp/p1r5/1q6/8/P7/1PP2PQP/2R2RK1 b - - 0 1',
+      fromSq:'c6', toSq:'g6',
+      type:  'Pin',
+      prompt:'Black to move — pin a piece to win material.',
+      hint:  'Slide the rook to g6, pinning the queen against the king.'
+    },
+    {
+      fen:   '3r2k1/p5p1/1p3p2/4n1np/NP6/PK5P/2B2PP1/2R5 w - - 0 1',
+      fromSq:'f2', toSq:'f4',
+      type:  'Double Attack',
+      prompt:'White to move — attack two black pieces at once.',
+      hint:  'Push the f-pawn to f4 — it hits both knights simultaneously.'
+    }
+  ];
+
+  let current=0, selected=null, streak=0, rating=800, timeLeft=60, timerInterval=null;
+
+  /* ── helpers ── */
+  function $(id){ return document.getElementById(id); }
+
+  /* Convert algebraic square ("a1","h8") to board array indices [row, col].
+     FEN row 0 = rank 8, row 7 = rank 1.  col 0 = file a, col 7 = file h. */
+  function algToBoard(sq){
+    const col = sq.charCodeAt(0)-97;          // a=0 … h=7
+    const row = 8 - parseInt(sq[1]);          // rank8→row0, rank1→row7
+    return {r:row, c:col};
+  }
+
+  /* When the board is FLIPPED (black at bottom), display row/col differ from
+     board array row/col.  We store board indices in data-br / data-bc,
+     and display indices in data-r / data-c (used for square colour). */
+  function getSquare(boardR, boardC){
+    return boardEl.querySelector(`.psq[data-br="${boardR}"][data-bc="${boardC}"]`);
+  }
+
+  function clearHighlights(){
+    boardEl.querySelectorAll('.psq').forEach(s=>s.classList.remove('selected','hint-sq','wrong-sq'));
+  }
+
+  function updateDots(){
+    for(let i=0;i<PUZZLES.length;i++){
+      const d=$('pd'+i);
+      d.className='puzzle-dot'+(i<current?' done':i===current?' active':'');
+    }
+  }
+
+  function setFeedback(msg,type){
+    const fb=$('puzzleFeedback');
+    fb.className='puzzle-feedback '+(type||'');
+    fb.textContent=msg;
+    if(type==='correct' && streak>=3) fb.classList.add('streak');
+  }
+
+  function startTimer(){
+    clearInterval(timerInterval);
+    timeLeft=60;
+    $('timer').textContent=timeLeft+'s';
+    timerInterval=setInterval(()=>{
+      timeLeft--;
+      $('timer').textContent=timeLeft+'s';
+      if(timeLeft<=0){ clearInterval(timerInterval); onWrong("⏰ Time's up! Try again."); }
+    },1000);
+  }
+
+  /* ── parse FEN position string to 8×8 array (board[rank8row=0][fileA=0]) ── */
+  function parseFEN(fen){
+    const parts=fen.split(' ');
+    const rows=parts[0].split('/');
+    const turn=parts[1];
+    const board=[];
+    rows.forEach(r=>{
+      const row=[];
+      for(const ch of r){
+        if(isNaN(ch)) row.push(ch);
+        else for(let i=0;i<+ch;i++) row.push(null);
+      }
+      board.push(row);
+    });
+    return {board, turn};
+  }
+
+  /* ── render board, flipped if black to move ── */
+  function render(){
+    const p=PUZZLES[current];
+    const {board, turn}=parseFEN(p.fen);
+    const flip=(turn==='b');   // flip=true → rank 8 at bottom
+    boardEl.innerHTML='';
+    selected=null;
+
+    for(let di=0;di<8;di++){          // di = display row (0=top of board visual)
+      for(let dj=0;dj<8;dj++){        // dj = display col (0=left)
+        const br = flip ? 7-di : di;  // actual board row
+        const bc = flip ? 7-dj : dj;  // actual board col
+
+        const sq=document.createElement('div');
+        // Square colour depends on display position
+        sq.className='psq '+((di+dj)%2===0?'light':'dark');
+        // Store BOARD indices so we can look up the piece & validate moves
+        sq.dataset.br=br;
+        sq.dataset.bc=bc;
+
+        const piece=board[br][bc];
+        if(piece) sq.textContent=PIECE_GLYPHS[piece]||'';
+
+        sq.addEventListener('click',()=>handleClick(br,bc,piece,turn,board));
+        boardEl.appendChild(sq);
+      }
+    }
+
+    $('puzzleCounter').textContent=`Puzzle ${current+1} of ${PUZZLES.length}`;
+    $('puzzleType').textContent=p.type;
+    $('puzzlePrompt').textContent=p.prompt;
+    $('puzzleFeedback').className='puzzle-feedback';
+    $('puzzleFeedback').textContent='';
+    $('hintText').textContent='';
+    $('puzzleCta').style.display='none';
+
+    // Update rank labels to match board orientation
+    const ranks = flip ? ['1','2','3','4','5','6','7','8'] : ['8','7','6','5','4','3','2','1'];
+    const rankEl=$('rankLabels');
+    if(rankEl) rankEl.querySelectorAll('span').forEach((s,i)=>s.textContent=ranks[i]);
+
+    updateDots();
+    startTimer();
+  }
+
+  /* ── click handler ── */
+  function handleClick(br,bc,piece,turn,board){
+    if($('puzzleCta').style.display==='block') return;
+
+    if(!selected){
+      if(!piece) return;
+      const isWhitePiece = (piece===piece.toUpperCase());
+      if(turn==='w' && !isWhitePiece) return;
+      if(turn==='b' &&  isWhitePiece) return;
+      selected={r:br, c:bc};
+      clearHighlights();
+      getSquare(br,bc).classList.add('selected');
+      return;
+    }
+
+    const from=selected;
+    selected=null;
+    clearHighlights();
+
+    // Get the expected from/to squares in board-array coordinates
+    const p=PUZZLES[current];
+    const expectedFrom=algToBoard(p.fromSq);
+    const expectedTo  =algToBoard(p.toSq);
+
+    const fromMatches = (from.r===expectedFrom.r && from.c===expectedFrom.c);
+    const toMatches   = (br  ===expectedTo.r     && bc  ===expectedTo.c);
+
+    if(fromMatches && toMatches){
+      onCorrect(from, {r:br, c:bc});
+    } else {
+      // Give a specific hint if right piece but wrong destination
+      const msg = fromMatches
+        ? '✗ Right piece, wrong square. Try again.'
+        : '✗ That\'s not the right piece. Try again.';
+      onWrong(msg, from.r, from.c, br, bc);
+    }
+  }
+
+  function onCorrect(from, to){
+    clearInterval(timerInterval);
+    streak++; rating+=10+(streak*2);
+    $('streak').textContent=streak;
+    $('rating').textContent=rating;
+
+    // Animate move on board
+    const fromSq=getSquare(from.r,from.c);
+    const toSq  =getSquare(to.r,  to.c);
+    if(fromSq && toSq){
+      toSq.textContent=fromSq.textContent;
+      fromSq.textContent='';
+      toSq.style.transform='scale(1.2)';
+      setTimeout(()=>toSq.style.transform='',250);
+    }
+
+    setFeedback(`✓ Correct! +${10+(streak*2)} rating`,'correct');
+    $('pd'+current).className='puzzle-dot done';
+
+    setTimeout(()=>{
+      if(current<PUZZLES.length-1){
+        current++;
+        render();
+      } else {
+        clearInterval(timerInterval);
+        $('puzzleCta').style.display='block';
+        updateDots();
+      }
+    },1300);
+  }
+
+  function onWrong(msg, fromR, fromC, toR, toC){
+    clearInterval(timerInterval);
+    streak=0;
+    $('streak').textContent=streak;
+    setFeedback(msg,'wrong');
+    // Shake the destination square if provided
+    if(toR!==undefined){
+      const sq=getSquare(toR,toC);
+      if(sq){ sq.classList.add('wrong-sq'); setTimeout(()=>sq.classList.remove('wrong-sq'),350); }
+    }
+    setTimeout(()=>render(),1000);
+  }
+
+  window.showHint=function(){
+    const p=PUZZLES[current];
+    $('hintText').textContent=p.hint;
+    // Highlight the correct piece's square
+    const {r,c}=algToBoard(p.fromSq);
+    const sq=getSquare(r,c);
+    if(sq){ sq.classList.add('hint-sq'); setTimeout(()=>sq.classList.remove('hint-sq'),1200); }
+  };
+
+  render();
+}
+
+/* ─── INIT ────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded',()=>{
-  triggerSR();
   const nl=document.getElementById('nl-home');
-  if(nl)nl.classList.add('on');
+  if(nl) nl.classList.add('on');
+  triggerSR();
+  initSkillTracker();
+  initChessPuzzles();
 });
 </script>
 
 <!-- FLOATING WHATSAPP BUTTON -->
 <div class="wa-wrap">
-  <a
-    class="wa-float"
-    href="https://wa.me/919641019781"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Chat with C4Chess on WhatsApp"
-  >
+  <a class="wa-float" href="https://wa.me/919641019781" target="_blank" rel="noopener noreferrer" aria-label="Chat with C4Chess on WhatsApp">
     <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
     </svg>
